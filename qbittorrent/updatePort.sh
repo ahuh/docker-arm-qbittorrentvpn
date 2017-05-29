@@ -4,7 +4,7 @@
 . /etc/qbittorrent/environment-variables.sh
 
 # Settings
-PIA_PASSWD_FILE=/userhome/openvpn-credentials.txt
+PIA_PASSWD_FILE=/config/openvpn-credentials.txt
 
 pia_username=$(head -1 $PIA_PASSWD_FILE)
 pia_passwd=$(tail -1 $PIA_PASSWD_FILE)

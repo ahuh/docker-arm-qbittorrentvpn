@@ -11,8 +11,8 @@ if [ -n "$PUID" ] && [ ! "$(id -u root)" -eq "$PUID" ]; then
 
     echo "Setting owner for qbittorrent paths to ${PUID}:${PGID}"
     chown -R ${RUN_AS}:${RUN_AS} \
-        /userhome \
-        /userhome/.config/qBittorrent
+        /config \
+        /config/.config/qBittorrent
 fi
 
 echo "

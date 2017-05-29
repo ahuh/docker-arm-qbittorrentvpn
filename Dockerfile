@@ -15,9 +15,9 @@ VOLUME /completeddir
 # WARNING: must have read/write accept for execution user (PUID/PGID)
 VOLUME /incompletedir
 # Volume userhome: home directory for execution user
-VOLUME /userhome
+VOLUME /config
 # Volume config: contains qBittorrent.conf (generated at first start if needed)
-VOLUME /userhome/.config/qBittorrent
+VOLUME /config/.config/qBittorrent
 
 # Set OpenVPN IDs (must be overloaded) and execution user (PUID/PGID)
 ENV OPENVPN_USERNAME=**None** \
@@ -48,9 +48,9 @@ RUN apt-get update \
     && apt-get install -y dumb-init -t stretch \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && groupmod -g 1000 users \
-    && useradd -u 911 -U -d /userhome -s /bin/false abc \
+    && useradd -u 911 -U -d /config -s /bin/false abc \
     && usermod -G users abc \
-    && mkdir -p /userhome/.config/qBittorrent
+    && mkdir -p /config/.config/qBittorrent
 
 # Add configuration and scripts
 COPY openvpn/ /etc/openvpn/

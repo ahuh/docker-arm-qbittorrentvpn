@@ -31,10 +31,10 @@ if [ "${OPENVPN_USERNAME}" = "**None**" ] || [ "${OPENVPN_PASSWORD}" = "**None**
  exit 1
 else
   echo "Setting OPENVPN credentials..."
-  mkdir -p /userhome
-  echo $OPENVPN_USERNAME > /userhome/openvpn-credentials.txt
-  echo $OPENVPN_PASSWORD >> /userhome/openvpn-credentials.txt
-  chmod 600 /userhome/openvpn-credentials.txt
+  mkdir -p /config
+  echo $OPENVPN_USERNAME > /config/openvpn-credentials.txt
+  echo $OPENVPN_PASSWORD >> /config/openvpn-credentials.txt
+  chmod 600 /config/openvpn-credentials.txt
 fi
 
 # Persist qBittorrent settings for use by qbittorrent-nox
