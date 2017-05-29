@@ -1,0 +1,7 @@
+echo "#! /bin/sh"
+echo ""
+echo "# qBittorrent needs to know which VPN provider is used"
+echo "export OPENVPN_PROVIDER=${OPENVPN_PROVIDER}"
+echo ""
+echo "export PUID=${PUID}"
+echo "export PGID=${PGID}"
