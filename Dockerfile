@@ -44,7 +44,7 @@ COPY sources.list.d/ /etc/apt/sources.list.d/
 # Update packages and install software
 RUN apt-get update \
     && apt-get install -y qbittorrent-nox \
-    && apt-get install -y openvpn curl nano iftop \
+    && apt-get install -y openvpn curl nano iftop crudini \
     && apt-get install -y dumb-init -t stretch \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
     && groupmod -g 1000 users \

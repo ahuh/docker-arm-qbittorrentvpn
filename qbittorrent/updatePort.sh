@@ -1,8 +1,5 @@
 #! /bin/sh
 
-# Source our persisted env variables from container startup
-. /etc/qbittorrent/environment-variables.sh
-
 # Settings
 PIA_PASSWD_FILE=/config/openvpn-credentials.txt
 
@@ -38,14 +35,14 @@ fi
 error=$(echo $pia_response | grep -oE "\"error\".*\"")
 if [ ! -z "$error" ]; then
      echo "PIA returned an error: $error"
-     exit
+     return
 fi
 
 # Get new port, check if empty
 new_port=$(echo $pia_response | grep -oE "[0-9]+")
 if [ -z "$new_port" ]; then
     echo "Could not find new port from PIA"
-    exit
+    return
 fi
 echo "Got new port $new_port from PIA"
 
@@ -53,7 +50,6 @@ echo "Got new port $new_port from PIA"
 # Now, set port in qBittorrent
 #
 
-# TODO : injecter $new_port dans le fichier "/config/qBittorrent.conf" (le créer si n'existe pas)
-#[Preferences]
-#Connection\PortRangeMin=$new_port
-
+# Add legal notice accepted to avoid first start validation with input key 'y'
+crudini --set $QBITTORRENT_CONFIG_FILE Preferences Connection\\PortRangeMin $new_port
+echo "Port $new_port set in qBittorrent config"

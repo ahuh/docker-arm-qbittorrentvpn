@@ -17,15 +17,18 @@ fi
 
 . /etc/qbittorrent/userSetup.sh
 
-echo "STARTING QBITTORRENT"
-exec sudo -u ${RUN_AS} /usr/bin/qbittorrent-nox --webui-port=8082 &
+echo "PREPARING QBITTORRENT CONFIG"
+. /etc/qbittorrent/prepareConfig.sh
 
 if [ "$OPENVPN_PROVIDER" = "PIA" ]
 then
     echo "CONFIGURING PORT FORWARDING"
-    exec /etc/qbittorrent/updatePort.sh &
+    . /etc/qbittorrent/updatePort.sh
 else
     echo "NO PORT UPDATER FOR THIS PROVIDER"
 fi
+
+echo "STARTING QBITTORRENT"
+exec sudo -u ${RUN_AS} /usr/bin/qbittorrent-nox --webui-port=8082 &
 
 echo "qBittorrent startup script complete."
