@@ -5,7 +5,7 @@ This project is based on an existing project, modified to work on ARMv7 WD My Cl
 See GitHub repository: https://github.com/haugene/docker-transmission-openvpn<br />
 <br />
 This image is part of a Docker images collection, intended to build a full-featured seedbox.<br />
-This image is compatible with WD My Cloud EX2 Ultra NAS.<br />
+This image is compatible with WD My Cloud EX2 Ultra NAS (Docker v1.7.0).<br />
 
 ## Installation
 
@@ -24,22 +24,22 @@ The container will run impersonated as this user, in order to have read/write ac
 ### Run container in background
 ```
 $ docker run --name qbittorrent --restart=always -d \
-			  -p <webui port>:8082 --cap-add=NET_ADMIN \
-			  --device=${DEVICE} \			  
-              -v <path to torrent dir to scan>:/torrentdir \
-              -v <path to completed dir>:/completeddir \
-              -v <path to incompleted dir>:/incompletedir \
-              -v <path to qBittorrent configuration dir>:/config/.config/qBittorrent \
-              -v /etc/localtime:/etc/localtime:ro \
-              -e "OPENVPN_PROVIDER=<openvpn provider>" \
-              -e "OPENVPN_CONFIG=<openvpn configuration>" \
-              -e "OPENVPN_USERNAME=<openvpn user name>" \
-              -e "OPENVPN_PASSWORD=<openvpn password> \
-              -e "OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60" \
-              -e "LOCAL_NETWORK=<local network ip/mask>" \
-              -e "PUID=<user uid>" \
-              -e "PGID=<user gid>" \
-			  ahuh/arm-qbittorrentvpn
+		-p <webui port>:8082 --cap-add=NET_ADMIN \
+		--device=${DEVICE} \			  
+		-v <path to torrent dir to scan>:/torrentdir \
+		-v <path to completed dir>:/completeddir \
+		-v <path to incompleted dir>:/incompletedir \
+		-v <path to qBittorrent configuration dir>:/config/.config/qBittorrent \
+		-v /etc/localtime:/etc/localtime:ro \
+		-e "OPENVPN_PROVIDER=<openvpn provider>" \
+		-e "OPENVPN_CONFIG=<openvpn configuration>" \
+		-e "OPENVPN_USERNAME=<openvpn user name>" \
+		-e "OPENVPN_PASSWORD=<openvpn password> \
+		-e "OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60" \
+		-e "LOCAL_NETWORK=<local network ip/mask>" \
+		-e "PUID=<user uid>" \
+		-e "PGID=<user gid>" \
+		ahuh/arm-qbittorrentvpn
 ```
 or
 ```
