@@ -1,4 +1,8 @@
 #!/bin/sh
+
+# Import template function
+. /etc/common/template.sh
+
 vpn_provider="$(echo $OPENVPN_PROVIDER | tr '[A-Z]' '[a-z]')"
 vpn_provider_configs="/etc/openvpn/$vpn_provider"
 if [ ! -d "$vpn_provider_configs" ]; then
@@ -37,9 +41,9 @@ else
   chmod 600 /config/openvpn-credentials.txt
 fi
 
-# Persist qBittorrent settings for use by qbittorrent-nox
-chmod 777 /etc/qbittorrent/environment-variables.tmpl.sh
-/etc/qbittorrent/environment-variables.tmpl.sh > /etc/qbittorrent/environment-variables.sh
+# Persist transmission settings for use by transmission-daemon
+template /etc/qbittorrent/environment-variables.sh.tmpl > /etc/qbittorrent/environment-variables.sh
+chmod +x /etc/qbittorrent/environment-variables.sh
 
 QBITTORRENT_CONTROL_OPTS="--script-security 2 --up /etc/qbittorrent/start.sh --down /etc/qbittorrent/stop.sh"
 

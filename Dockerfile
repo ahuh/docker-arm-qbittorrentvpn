@@ -15,17 +15,19 @@ VOLUME /completeddir
 # WARNING: must have read/write accept for execution user (PUID/PGID)
 VOLUME /incompletedir
 # Volume userhome: home directory for execution user
+# WARNING: must have read/write accept for execution user (PUID/PGID)
 VOLUME /config
 # Volume config: contains qBittorrent.conf (generated at first start if needed)
 VOLUME /config/.config/qBittorrent
 
-# Set OpenVPN IDs (must be overloaded) and execution user (PUID/PGID)
+# Set environment variables
+# - Set OpenVPN IDs (must be overloaded) and execution user (PUID/PGID)
 ENV OPENVPN_USERNAME=**None** \
     OPENVPN_PASSWORD=**None** \
     OPENVPN_PROVIDER=**None** \
     PUID=\
     PGID=
-# Set xterm for nano
+# - Set xterm for nano
 ENV TERM xterm
 
 # Remove previous apt repos
@@ -46,18 +48,21 @@ RUN apt-get update \
     && apt-get install -y qbittorrent-nox \
     && apt-get install -y openvpn curl nano iftop crudini \
     && apt-get install -y dumb-init -t stretch \
-    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* \
-    && groupmod -g 1000 users \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*    
+
+# Create and set user & group for impersonation
+RUN groupmod -g 1000 users \
     && useradd -u 911 -U -d /config -s /bin/false abc \
     && usermod -G users abc \
-    && mkdir -p /config/.config/qBittorrent
 
-# Add configuration and scripts
+# Copy configuration and scripts
+COPY common/ /etc/common/
 COPY openvpn/ /etc/openvpn/
 COPY qbittorrent/ /etc/qbittorrent/
 
 # Fix execution permissions after copy 
-RUN chmod +x /etc/openvpn/*.sh \
+RUN chmod +x /etc/common/*.sh \
+	&& chmod +x /etc/openvpn/*.sh \
     && chmod +x /etc/qbittorrent/*.sh
 
 # Expose port

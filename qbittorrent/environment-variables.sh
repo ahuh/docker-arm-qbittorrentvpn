@@ -1,0 +1,7 @@
+#! /bin/sh
+
+# qBittorrent needs to know which VPN provider is used
+export OPENVPN_PROVIDER=${OPENVPN_PROVIDER}
+
+export PUID=${PUID}
+export PGID=${PGID}
