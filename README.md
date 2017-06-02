@@ -25,7 +25,7 @@ The container will run impersonated as this user, in order to have read/write ac
 ```
 $ docker run --name qbittorrent --restart=always -d \
 		-p <webui port>:8082 --cap-add=NET_ADMIN \
-		--device=${DEVICE} \			  
+		--device=<tunnel network interface> \			  
 		-v <path to torrent dir to scan>:/torrentdir \
 		-v <path to completed dir>:/completeddir \
 		-v <path to incompleted dir>:/incompletedir \
