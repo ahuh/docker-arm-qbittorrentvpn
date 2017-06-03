@@ -1,4 +1,4 @@
-#!/bin/sh
+#! /bin/bash
 
 # Source our persisted env variables from container startup
 . /etc/qbittorrent/environment-variables.sh

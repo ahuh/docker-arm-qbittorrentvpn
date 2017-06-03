@@ -53,7 +53,7 @@ RUN apt-get update \
 # Create and set user & group for impersonation
 RUN groupmod -g 1000 users \
     && useradd -u 911 -U -d /config -s /bin/false abc \
-    && usermod -G users abc \
+    && usermod -G users abc
 
 # Copy configuration and scripts
 COPY common/ /etc/common/

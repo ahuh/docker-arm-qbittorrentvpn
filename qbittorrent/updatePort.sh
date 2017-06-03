@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 # Settings
 PIA_PASSWD_FILE=/config/openvpn-credentials.txt
