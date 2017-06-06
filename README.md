@@ -31,6 +31,7 @@ The container will run impersonated as this user, in order to have read/write ac
 ### Run container in background
 ```
 $ docker run --name qbittorrent --restart=always -d \
+		--add-host=dockerhost:<docker host IP> \
 		--dns=<ip of dns #1> --dns=<ip of dns #2> \
 		-p <webui port>:8082 --cap-add=NET_ADMIN \
 		--device=<tunnel network interface> \			  
